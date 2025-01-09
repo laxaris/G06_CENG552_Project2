@@ -1,0 +1,30 @@
+[LOG] Sending: WITHDRAW CARD# 1234123456 TRANS# 1 NO FROM NO TO $20000.00
+[LOG] Response: SUCCESS: Operation successful.
+[LOG] Sending: WITHDRAW CARD# 1234123456 TRANS# 1 NO FROM NO TO $20000.00
+[LOG] Response: SUCCESS: Operation successful.
+[LOG] Sending: WITHDRAW CARD# 1234123456 TRANS# 1 NO FROM NO TO $20000.00
+[LOG] Response: FAILURE: Insufficient cash on hand.
+[LOG] Sending: WITHDRAW CARD# 1234123456 TRANS# 1 NO FROM NO TO $100.00
+[LOG] Response: SUCCESS: Operation successful.
+[LOG] Sending: COMP_DEP CARD# 1234123456 TRANS# 2 NO FROM NO TO $100.00
+[LOG] Response: SUCCESS: Operation successful.
+[LOG] Sending: WITHDRAW CARD# 1234123456 TRANS# 1 NO FROM NO TO $100.00
+[LOG] Response: SUCCESS: Operation successful.
+[LOG] Sending: INQUIRY  CARD# 1234123456 TRANS# 1 FROM 123456 NO TO NO AMOUNT
+[LOG] Response: SUCCESS: Operation successful.
+[LOG] Sending: WITHDRAW CARD# 1234123456 TRANS# 2 NO FROM NO TO $1000.00
+[LOG] Response: SUCCESS: Operation successful.
+[LOG] Sending: TRANSFER CARD# 1234123456 TRANS# 3 FROM 123456 TO 111222 $10000.00
+[LOG] Response: SUCCESS: Operation successful.
+[LOG] Sending: INQUIRY  CARD# 1234123456 TRANS# 4 FROM 123456 NO TO NO AMOUNT
+[LOG] Response: SUCCESS: Operation successful.
+[LOG] Sending: INQUIRY  CARD# 1234123456 TRANS# 1 FROM 123456 NO TO NO AMOUNT
+[LOG] Response: SUCCESS: Operation successful.
+[LOG] Sending: INQUIRY  CARD# 1234123456 TRANS# 2 FROM 123456 NO TO NO AMOUNT
+[LOG] Response: SUCCESS: Operation successful.
+[LOG] Sending: TRANSFER CARD# 1234123456 TRANS# 3 FROM 123456 TO 111222 $30000.00
+[LOG] Response: SUCCESS: Operation successful.
+[LOG] Sending: WITHDRAW CARD# 1234123456 TRANS# 4 NO FROM NO TO $500.00
+[LOG] Response: SUCCESS: Operation successful.
+[LOG] Sending: INQUIRY  CARD# 1234111222 TRANS# 5 FROM 111222 NO TO NO AMOUNT
+[LOG] Response: SUCCESS: Operation successful.
