@@ -1,15 +1,14 @@
 package atm;
 
-import java.util.Scanner;
+
 import banking.Card;
 
 public class CardReader {
     private ATM atm;
-    private Scanner scanner;
 
     public CardReader(ATM atm) {
         this.atm = atm;
-        this.scanner = atm.getDisplay().scanner;
+
     }
 
     public Card readCard() throws Display.Cancelled {

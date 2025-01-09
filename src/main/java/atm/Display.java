@@ -1,70 +1,93 @@
 package atm;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 import banking.Money;
 
 public class Display {
-    public Scanner scanner;
-
+    private Scanner scanner;
+    private boolean testMode = false;
+    private Queue<String> testInputs;
 
     public Display() {
-
         scanner = new Scanner(System.in);
+        testInputs = new LinkedList<>();
     }
 
-    public void showMessage(String message) {
-        System.out.println("[DISPLAY] " + message);
+    public void setTestMode(boolean enabled) {
+        this.testMode = enabled;
+        if (enabled) {
+            showMessage("[INFO] Test mode activated. Inputs will be taken from the queue.");
+        } else {
+            showMessage("[INFO] Test mode deactivated. Manual input required.");
+        }
     }
-    
+
+    public void setFakeInput(String... inputs) {
+        synchronized (testInputs) {
+            for (String input : inputs) {
+                testInputs.add(input);
+            }
+            showMessage("[TEST MODE] Fake inputs added: " + String.join(", ", inputs));
+            testInputs.notifyAll();
+        }
+    }
+
+    private String getNextInput() {
+        if (testMode) {
+            synchronized (testInputs) {
+                while (testInputs.isEmpty()) {
+                    try {
+                        showMessage("[TEST MODE] Waiting for input...");
+                        testInputs.wait();
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        return "";
+                    }
+                }
+                String nextInput = testInputs.poll();
+                showMessage("[TEST MODE] Input received: " + (nextInput.isEmpty() ? "[ENTER]" : nextInput));
+                return nextInput;
+            }
+        } else {
+            return scanner.nextLine().trim();
+        }
+    }
+
     public String readString() {
-    	
-    	String input = scanner.nextLine().trim();
-    	return input;
+        return getNextInput();
     }
 
     public int readPIN(String prompt) throws Cancelled {
-        System.out.println("[DISPLAY] " + prompt);
-        String input = scanner.nextLine().trim();
+        showMessage(prompt);
+        String input = getNextInput();
         if (input.isEmpty()) {
             throw new Cancelled();
         }
         return Integer.parseInt(input);
     }
-    
+
     public boolean readEnter() {
-    	if(scanner.nextLine().isEmpty()) {
-    		return true;
-    	}
-    	else {
-    		return false;
-    	}
-    	
+        showMessage("[DISPLAY] Press ENTER to continue...");
+        return getNextInput().isEmpty();
     }
 
     public int readMenuChoice(String prompt, String[] menu) throws Cancelled {
-        System.out.println("[DISPLAY] " + prompt);
+        showMessage(prompt);
         for (int i = 0; i < menu.length; i++) {
             System.out.println(" " + (i + 1) + ") " + menu[i]);
         }
-        String input = scanner.nextLine().trim();
+        String input = getNextInput();
         if (input.isEmpty()) {
             throw new Cancelled();
         }
         return Integer.parseInt(input) - 1;
     }
-    
-    public void setFakeInput(String input) {
-        InputStream fakeInput = new ByteArrayInputStream(input.getBytes());
-        System.setIn(fakeInput);
-        scanner = new Scanner(System.in); 
-    }
-
 
     public Money readAmount(String prompt) throws Cancelled {
-        System.out.println("[DISPLAY] " + prompt);
-        String input = scanner.nextLine().trim();
+        showMessage(prompt);
+        String input = getNextInput();
         if (input.isEmpty()) {
             throw new Cancelled();
         }
@@ -76,7 +99,11 @@ public class Display {
 
     public static class Cancelled extends Exception {
         public Cancelled() {
-            super("Cancelled by user");
+            super("Operation Cancelled by User");
         }
+    }
+
+    public void showMessage(String message) {
+        System.out.println(message);
     }
 }

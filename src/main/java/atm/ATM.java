@@ -18,9 +18,9 @@ public class ATM implements Runnable {
     private ReceiptPrinter receiptPrinter;
     private int state;
     private boolean switchOn;
-    public Money maxWithdrawPerDay;
-    protected Money maxWithdrawPerTransaction;
-    protected Money minCashToAllowTransaction;
+    private Money maxWithdrawPerDay;
+    private Money maxWithdrawPerTransaction;
+    private Money minCashToAllowTransaction;
 
     private static final int OFF_STATE = 0;
     private static final int IDLE_STATE = 1;
@@ -45,17 +45,17 @@ public class ATM implements Runnable {
 
     private boolean validateOperatorPanelSettings() {
         return operatorPanel.getInitialCash() != null &&
-               maxWithdrawPerTransaction != null &&
-               maxWithdrawPerDay != null &&
-               minCashToAllowTransaction != null;
+               getMaxWithdrawPerTransaction() != null &&
+               getMaxWithdrawPerDay() != null &&
+               getMinCashToAllowTransaction() != null;
     }
 
     private boolean checkCashAvailability() {
-        return cashDispenser.getCashOnHand().greaterEqual(minCashToAllowTransaction);
+        return cashDispenser.getCashOnHand().greaterEqual(getMinCashToAllowTransaction());
     }
 
     public void run() {
-        while (true) {
+
             
             switch (state) {
                 case OFF_STATE:
@@ -83,7 +83,7 @@ public class ATM implements Runnable {
                     state = IDLE_STATE;
                     break;
             }
-        }
+        
     }
 
     public void performStartup() {
@@ -109,7 +109,7 @@ public class ATM implements Runnable {
 
             cashDispenser.setInitialCash(operatorPanel.getInitialCash());
             networkToBank.openConnection();
-            DatabaseProxy.setDailyLimits(maxWithdrawPerDay);
+            DatabaseProxy.setDailyLimits(getMaxWithdrawPerDay());
             state = IDLE_STATE;
         } catch (Display.Cancelled e) {
             display.showMessage("[ERROR] Operation Cancelled.");
@@ -126,4 +126,28 @@ public class ATM implements Runnable {
     public Log getLog() { return log; }
     public NetworkToBank getNetworkToBank() { return networkToBank; }
     public ReceiptPrinter getReceiptPrinter() { return receiptPrinter; }
+
+	public Money getMaxWithdrawPerDay() {
+		return maxWithdrawPerDay;
+	}
+
+	public void setMaxWithdrawPerDay(Money maxWithdrawPerDay) {
+		this.maxWithdrawPerDay = maxWithdrawPerDay;
+	}
+
+	public Money getMaxWithdrawPerTransaction() {
+		return maxWithdrawPerTransaction;
+	}
+
+	public void setMaxWithdrawPerTransaction(Money maxWithdrawPerTransaction) {
+		this.maxWithdrawPerTransaction = maxWithdrawPerTransaction;
+	}
+
+	public Money getMinCashToAllowTransaction() {
+		return minCashToAllowTransaction;
+	}
+
+	public void setMinCashToAllowTransaction(Money minCashToAllowTransaction) {
+		this.minCashToAllowTransaction = minCashToAllowTransaction;
+	}
 }

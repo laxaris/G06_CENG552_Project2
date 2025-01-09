@@ -29,15 +29,15 @@ public class OperatorPanel {
                     atm.getDisplay().showMessage("[OPERATOR PANEL] initialCash set to " + t);
                 } else if (choice == 1) {
                     Money k = atm.getDisplay().readAmount("[OPERATOR PANEL] Enter max withdraw per day (k): ");
-                    atm.maxWithdrawPerDay = k;
+                    atm.setMaxWithdrawPerDay(k);
                     atm.getDisplay().showMessage("[OPERATOR PANEL] maxWithdrawPerDay set to " + k);
                 } else if (choice == 2) {
                     Money m = atm.getDisplay().readAmount("[OPERATOR PANEL] Enter max withdraw per transaction (m): ");
-                    atm.maxWithdrawPerTransaction = m;
+                    atm.setMaxWithdrawPerTransaction(m);
                     atm.getDisplay().showMessage("[OPERATOR PANEL] maxWithdrawPerTransaction set to " + m);
                 } else if (choice == 3) {
                     Money n = atm.getDisplay().readAmount("[OPERATOR PANEL] Enter min cash in ATM (n) to allow transactions: ");
-                    atm.minCashToAllowTransaction = n;
+                    atm.setMinCashToAllowTransaction(n);
                     atm.getDisplay().showMessage("[OPERATOR PANEL] minCashToAllowTransaction set to " + n);
                 } else if (choice == 4) {
                     atm.getDisplay().showMessage("[OPERATOR PANEL] Exiting...");
@@ -46,9 +46,9 @@ public class OperatorPanel {
                 else{
                     Money money  = new Money(1000);
                     atm.getCashDispenser().setInitialCash(new Money(10000));
-                    atm.maxWithdrawPerDay = money;
-                    atm.maxWithdrawPerTransaction = money;
-                    atm.minCashToAllowTransaction = new Money(1);
+                    atm.setMaxWithdrawPerDay(money);
+                    atm.setMaxWithdrawPerTransaction(money);
+                    atm.setMinCashToAllowTransaction(new Money(1));
                     break;
                 }
             } catch (Display.Cancelled e) {

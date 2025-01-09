@@ -19,8 +19,7 @@ public class Main {
             ATM atm = new ATM(1, "Main Branch", "MyBank", bankAddress);
             
             atm.getCashDispenser().setInitialCash(new Money(10000));
-            Thread atmThread = new Thread(atm);
-            atmThread.start();
+            atm.run();
      
 
             
