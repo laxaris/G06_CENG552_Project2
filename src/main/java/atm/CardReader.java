@@ -14,9 +14,9 @@ public class CardReader {
 
     public Card readCard() throws Display.Cancelled {
         System.out.println("[CARD READER] Enter your 10-digit card number:");
-        String input = scanner.nextLine().trim();
+        String input = atm.getDisplay().readString();
         
-        if(input.compareTo("cancel") == 0){
+        if(input.compareTo("capncel") == 0){
             System.out.println("girdim");
             throw new Display.Cancelled();
         }

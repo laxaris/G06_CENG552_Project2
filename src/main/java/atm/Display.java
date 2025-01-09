@@ -8,6 +8,7 @@ import banking.Money;
 public class Display {
     public Scanner scanner;
 
+
     public Display() {
 
         scanner = new Scanner(System.in);
@@ -15,6 +16,12 @@ public class Display {
 
     public void showMessage(String message) {
         System.out.println("[DISPLAY] " + message);
+    }
+    
+    public String readString() {
+    	
+    	String input = scanner.nextLine().trim();
+    	return input;
     }
 
     public int readPIN(String prompt) throws Cancelled {
@@ -24,6 +31,16 @@ public class Display {
             throw new Cancelled();
         }
         return Integer.parseInt(input);
+    }
+    
+    public boolean readEnter() {
+    	if(scanner.nextLine().isEmpty()) {
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
+    	
     }
 
     public int readMenuChoice(String prompt, String[] menu) throws Cancelled {

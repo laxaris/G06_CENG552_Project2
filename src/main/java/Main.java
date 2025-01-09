@@ -21,6 +21,7 @@ public class Main {
             atm.getCashDispenser().setInitialCash(new Money(10000));
             Thread atmThread = new Thread(atm);
             atmThread.start();
+     
 
             
             

@@ -3,7 +3,6 @@ package atm;
 import java.net.InetAddress;
 import banking.*;
 
-import java.util.Scanner;
 
 public class ATM implements Runnable {
     private int id;
@@ -62,10 +61,12 @@ public class ATM implements Runnable {
                 case OFF_STATE:
                     display.showMessage("ATM is OFF. Press ENTER to switch ON.");
                     
-                    if (display.scanner.nextLine().isEmpty()) {
+      
+                    if (display.readEnter()) {
                         performStartup();
                     }
                     break;
+                    
                 case IDLE_STATE:
              
                     display.showMessage("Waiting for card insertion...");

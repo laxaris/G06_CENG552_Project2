@@ -37,9 +37,8 @@ public class InitializeParametersSteps {
     @When("the operator sets the max withdraw per day to {int}")
     public void the_operator_sets_the_max_withdraw_per_day_to(Integer k) {
     	
-    	String yalanGiris = "\n";
+    	String yalanGiris = "\n1\n2\n"+Integer.toString(k)+"\n";
     	display.setFakeInput(yalanGiris);
-    
     	
     }
 
