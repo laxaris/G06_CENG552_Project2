@@ -1,10 +1,9 @@
 package atm;
 
 import banking.Card;
-import banking.Status;
-import banking.Receipt;
+
 import banking.Money;
-import atm.transaction.Transaction;
+import transaction.Transaction;
 import banking.DatabaseProxy;
 
 public class Session {
