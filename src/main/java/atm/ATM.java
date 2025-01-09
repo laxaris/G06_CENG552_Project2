@@ -2,7 +2,7 @@ package atm;
 
 import java.net.InetAddress;
 import banking.*;
-import atm.transaction.*;
+
 import java.util.Scanner;
 
 public class ATM implements Runnable {
