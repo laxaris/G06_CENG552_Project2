@@ -1,12 +1,15 @@
 package atm;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.Scanner;
 import banking.Money;
 
 public class Display {
-    private Scanner scanner;
+    public Scanner scanner;
 
     public Display() {
+
         scanner = new Scanner(System.in);
     }
 
@@ -34,6 +37,13 @@ public class Display {
         }
         return Integer.parseInt(input) - 1;
     }
+    
+    public void setFakeInput(String input) {
+        InputStream fakeInput = new ByteArrayInputStream(input.getBytes());
+        System.setIn(fakeInput);
+        scanner = new Scanner(System.in); 
+    }
+
 
     public Money readAmount(String prompt) throws Cancelled {
         System.out.println("[DISPLAY] " + prompt);

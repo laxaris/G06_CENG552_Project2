@@ -9,7 +9,7 @@ public class CardReader {
 
     public CardReader(ATM atm) {
         this.atm = atm;
-        this.scanner = new Scanner(System.in);
+        this.scanner = atm.getDisplay().scanner;
     }
 
     public Card readCard() throws Display.Cancelled {

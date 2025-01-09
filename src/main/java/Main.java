@@ -17,6 +17,7 @@ public class Main {
 
             InetAddress bankAddress = InetAddress.getByName("127.0.0.1");
             ATM atm = new ATM(1, "Main Branch", "MyBank", bankAddress);
+            
             atm.getCashDispenser().setInitialCash(new Money(10000));
             Thread atmThread = new Thread(atm);
             atmThread.start();

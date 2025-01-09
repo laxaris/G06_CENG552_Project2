@@ -19,7 +19,7 @@ public class ATM implements Runnable {
     private ReceiptPrinter receiptPrinter;
     private int state;
     private boolean switchOn;
-    protected Money maxWithdrawPerDay;
+    public Money maxWithdrawPerDay;
     protected Money maxWithdrawPerTransaction;
     protected Money minCashToAllowTransaction;
 
@@ -28,6 +28,7 @@ public class ATM implements Runnable {
     private static final int SERVING_CUSTOMER_STATE = 2;
 
     public ATM(int id, String place, String bankName, InetAddress bankAddress) {
+    	this.display = new Display();
         this.id = id;
         this.place = place;
         this.bankName = bankName;
@@ -36,7 +37,7 @@ public class ATM implements Runnable {
         this.log = new Log();
         this.cardReader = new CardReader(this);
         this.cashDispenser = new CashDispenser(log);
-        this.display = new Display();
+        
         this.networkToBank = new NetworkToBank(log, bankAddress,this);
         this.receiptPrinter = new ReceiptPrinter();
         this.state = OFF_STATE;
@@ -60,8 +61,8 @@ public class ATM implements Runnable {
             switch (state) {
                 case OFF_STATE:
                     display.showMessage("ATM is OFF. Press ENTER to switch ON.");
-                    Scanner scanner = new Scanner(System.in);
-                    if (scanner.nextLine().isEmpty()) {
+                    
+                    if (display.scanner.nextLine().isEmpty()) {
                         performStartup();
                     }
                     break;
@@ -84,7 +85,7 @@ public class ATM implements Runnable {
         }
     }
 
-    private void performStartup() {
+    public void performStartup() {
         try {
             int choice = display.readMenuChoice(
                     "[ATM] Press '1' for Operator Panel or '2' to continue without configuration.",
