@@ -7,12 +7,12 @@ public class DatabaseProxy {
     private static Map<Integer, Account> accounts = new HashMap<>();
     private static Map<Integer, Money> dailyLimits = new HashMap<>();
 
-    // Hesap ekleme
+  
     public static void addAccount(Account account) {
         accounts.put(account.getAccountNumber(), account);
     }
 
-    // Hesap bilgilerini alma
+    
     public static Account getAccount(int accountNumber) {
         return accounts.get(accountNumber);
     }
@@ -32,13 +32,13 @@ public class DatabaseProxy {
         return dailyLimits.get(accountNumber);
     }
 
-    // Şifre doğrulama
+    
     public static boolean verifyPassword(int accountNumber, String password) {
         Account account = accounts.get(accountNumber);
         return account != null && account.getPassword().equals(password);
     }
 
-    // Hesap bakiyesi kontrolü
+
     public static double getBalance(int accountNumber) {
         Account account = accounts.get(accountNumber);
         if (account != null) {

@@ -37,6 +37,12 @@ public class Session {
             switch (state) {
                 case READING_CARD_STATE:
                     card = atm.getCardReader().readCard();
+                    if(!atm.checkCashAvailability()) {
+                    	atm.getDisplay().showMessage("[DISPLAY]: Insufficient Cash, Please contact this number 555-555-5555");
+                        state = EJECTING_CARD_STATE;
+                        break;
+                    }
+                    
                     if (card != null && DatabaseProxy.getAccount(card.getAccountNumber()) != null) {
                         state = READING_PIN_STATE;
                         dailyWithdrawalLimit = DatabaseProxy.getDailyLimit(card.getAccountNumber());
@@ -90,7 +96,13 @@ public class Session {
 
                 case EJECTING_CARD_STATE:
                     atm.getCardReader().ejectCard();
+                    if(!atm.checkCashAvailability()) {
+                    	state = FINAL_STATE;
+                    	atm.state = 3;
+                        break;
+                    }
                     state = FINAL_STATE;
+                    
                     break;
             }
         }

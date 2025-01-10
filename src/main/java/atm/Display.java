@@ -9,6 +9,8 @@ public class Display {
     private Scanner scanner;
     private boolean testMode = false;
     private Queue<String> testInputs;
+    private String lastShowedMessage;
+    
 
     public Display() {
         scanner = new Scanner(System.in);
@@ -39,7 +41,6 @@ public class Display {
             synchronized (testInputs) {
                 while (testInputs.isEmpty()) {
                     try {
-                        showMessage("[TEST MODE] Waiting for input...");
                         testInputs.wait();
                     } catch (InterruptedException e) {
                         Thread.currentThread().interrupt();
@@ -104,6 +105,13 @@ public class Display {
     }
 
     public void showMessage(String message) {
+    	lastShowedMessage = message;
+    	
         System.out.println(message);
     }
+
+	public String getLastDisplayedMessage() {
+		
+		return lastShowedMessage;
+	}
 }

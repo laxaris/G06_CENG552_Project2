@@ -1,25 +1,30 @@
 package steps;
 
 import static org.junit.Assert.assertEquals;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import atm.ATM;
 import atm.Display;
 import banking.Money;
 import io.cucumber.java.en.*;
 
-public class InitializeParametersSteps {
+public class FR1_InitializeParametersSteps {
 
     private ATM atm;
     private Display display;
     private Thread atmThread;
 
-    @Given("the ATM is turned off")
-    public void the_ATM_is_turned_off() {
-        atm = new ATM(1, "Mybank", null, null);
+    @Given("the ATM is turned offf")
+    public void the_ATM_is_turned_off() throws UnknownHostException {
+    	  InetAddress bankAddress = InetAddress.getByName("127.0.0.1");
+        atm = new ATM(1, "Mybank", null, bankAddress);
         atm.getDisplay().setTestMode(true);
         display = atm.getDisplay();
     }
 
-    @When("the operator turns on the ATM")
+    @When("the operator turns on the  ATM")
     public void the_operator_turns_on_the_atm() {
         atmThread = new Thread(atm);
         atmThread.start();

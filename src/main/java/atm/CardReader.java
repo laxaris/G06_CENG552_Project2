@@ -12,26 +12,41 @@ public class CardReader {
     }
 
     public Card readCard() throws Display.Cancelled {
-        System.out.println("[CARD READER] Enter your 10-digit card number:");
-        String input = atm.getDisplay().readString();
+        atm.getDisplay().showMessage("[CARD READER] Enter your 10-digit card number followed by the expiry date (e.g., 1234567890 01-24):");
+        String input = atm.getDisplay().readString().trim();
         
-        if(input.compareTo("capncel") == 0){
+        // Kullanıcı iptali kontrolü
+        if (input.equalsIgnoreCase("cancel")) {
             System.out.println("girdim");
             throw new Display.Cancelled();
         }
 
-        if (input.length() != 10 || !input.matches("\\d+")) {
+
+        String[] parts = input.split("\\s+"); 
+        if (parts.length != 2) {
+            System.out.println("[ERROR] Invalid input format. Please provide both card number and expiry date.");
+            return null;
+        }
+
+        String cardNumber = parts[0];
+        String expiryDate = parts[1];
+
+    
+        if (cardNumber.length() != 10 || !cardNumber.matches("\\d+")) {
             System.out.println("[ERROR] Invalid card number format.");
             return null;
         }
-    
-        Card card = new Card(Integer.parseInt(input));
-        if (!validateCard(card)) {
+
+     
+        Card card = new Card(Integer.parseInt(cardNumber), expiryDate);
+        if (!validateCard(card) || card.isExpired()) {
             System.out.println("[ERROR] Invalid or expired card.");
             return null;
         }
+
         return card;
     }
+
     
     private boolean validateCard(Card card) {
         return card.getAccountNumber() > 0; 
@@ -39,10 +54,10 @@ public class CardReader {
     
 
     public void ejectCard() {
-        System.out.println("[CARD READER] Card ejected.");
+    	atm.getDisplay().showMessage("[CARD READER] Card ejected.");
     }
 
     public void retainCard() {
-        System.out.println("[CARD READER] Card retained.");
+    	atm.getDisplay().showMessage("[CARD READER] Card retained.");
     }
 }

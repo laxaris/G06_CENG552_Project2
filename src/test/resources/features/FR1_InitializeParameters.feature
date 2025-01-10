@@ -4,8 +4,8 @@ Feature: Initialize ATM parameters
   I want to set initial total cash, max withdraw per day, max withdraw per transaction, and min cash to allow transaction.
 
   Scenario: Set t, k, m, n parameters
-    Given the ATM is turned off
-    When the operator turns on the ATM
+    Given the ATM is turned offf
+    When the operator turns on the  ATM
     And the operator sets the initial total cash to 10000
     And the operator sets the max withdraw per day to 2000
     And the operator sets the max withdraw per transaction to 1000

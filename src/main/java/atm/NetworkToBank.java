@@ -21,17 +21,16 @@ public class NetworkToBank {
         this.atm = atm;
     }
 
-    // Banka bağlantısını açma
+
     public void openConnection() {
         System.out.println("[NETWORK] Connection to bank opened at " + bankAddress);
     }
 
-    // Banka bağlantısını kapatma
+
     public void closeConnection() {
         System.out.println("[NETWORK] Connection to bank closed.");
     }
 
-    // Mesaj gönderme ve yanıt alma
     public Status sendMessage(Message message, Balances balances) {
         log.logSend(message);
         Status result;
@@ -66,7 +65,7 @@ public class NetworkToBank {
         return result;
     }
 
-    // Yetkilendirme kontrolü
+
     public Status sendAuthorizationRequest(Card card, int pin) {
         if (!DatabaseProxy.verifyPassword(card.getAccountNumber(), String.valueOf(pin))) {
             return Status.invalidPIN();
@@ -74,7 +73,7 @@ public class NetworkToBank {
         return Status.success();
     }
 
-    // Para çekme işlemi (FR11-14)
+
     private Status handleWithdrawal(Message message,Balances balances) {
 
         int accountNumber = message.getCard().getAccountNumber();
@@ -94,7 +93,7 @@ public class NetworkToBank {
         return Status.failure("Insufficient balance.");
     }
 
-    // Para yatırma işlemi (FR17)
+ 
     private Status handleDeposit(Message message) {
         int accountNumber = message.getCard().getAccountNumber();
         Money amount = message.getAmount();
@@ -103,7 +102,7 @@ public class NetworkToBank {
         return Status.success();
     }
 
-    // Transfer işlemi (FR17)
+
     private Status handleTransfer(Message message,Balances balances) {
         int fromAccount = message.getFromAccount();
         int toAccount = message.getToAccount();
@@ -119,7 +118,7 @@ public class NetworkToBank {
         return Status.failure("Transfer failed. Check balance and account details.");
     }
 
-    // Bakiye sorgulama (FR9)
+
     private Status handleInquiry(Message message) {
 
         return Status.success();

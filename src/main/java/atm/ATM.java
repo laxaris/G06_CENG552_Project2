@@ -16,7 +16,7 @@ public class ATM implements Runnable {
     private Log log;
     private NetworkToBank networkToBank;
     private ReceiptPrinter receiptPrinter;
-    private int state;
+    protected int state;
     private boolean switchOn;
     private Money maxWithdrawPerDay;
     private Money maxWithdrawPerTransaction;
@@ -25,6 +25,7 @@ public class ATM implements Runnable {
     private static final int OFF_STATE = 0;
     private static final int IDLE_STATE = 1;
     private static final int SERVING_CUSTOMER_STATE = 2;
+	protected static final int ERROR_STATE = 3;
 
     public ATM(int id, String place, String bankName, InetAddress bankAddress) {
     	this.display = new Display();
@@ -50,15 +51,20 @@ public class ATM implements Runnable {
                getMinCashToAllowTransaction() != null;
     }
 
-    private boolean checkCashAvailability() {
+    public boolean checkCashAvailability() {
         return cashDispenser.getCashOnHand().greaterEqual(getMinCashToAllowTransaction());
     }
 
     public void run() {
 
-            
+            while(true) {
             switch (state) {
+            	case ERROR_STATE:
+            		break;
+
+            	
                 case OFF_STATE:
+                	
                     display.showMessage("ATM is OFF. Press ENTER to switch ON.");
                     
       
@@ -68,7 +74,7 @@ public class ATM implements Runnable {
                     break;
                     
                 case IDLE_STATE:
-             
+                	
                     display.showMessage("Waiting for card insertion...");
                     try{
                     new Session(this).performSession();}
@@ -77,12 +83,18 @@ public class ATM implements Runnable {
                         state = OFF_STATE;
                         break;
                     }
+                    if(this.state == ERROR_STATE) {
+                        System.out.println("Error");
+                        break;
+                    }
+                    else{
+
                     state = SERVING_CUSTOMER_STATE;
-                    break;
+                    break;}
                 case SERVING_CUSTOMER_STATE:
                     state = IDLE_STATE;
                     break;
-            }
+            }}
         
     }
 
@@ -95,13 +107,13 @@ public class ATM implements Runnable {
 
             if (choice == 0) {
                 operatorPanel.showMenu();
-                if (!validateOperatorPanelSettings() || !checkCashAvailability()) {
+                if (!validateOperatorPanelSettings() ) {
                     display.showMessage("[ERROR] Invalid settings or insufficient cash.");
                     state = OFF_STATE;
                     return;
                 }
             }
-            if (!validateOperatorPanelSettings() || !checkCashAvailability()) {
+            if (!validateOperatorPanelSettings() ) {
                 display.showMessage("[ERROR] Invalid settings or insufficient cash.");
                 state = OFF_STATE;
                 return;
@@ -116,7 +128,11 @@ public class ATM implements Runnable {
             state = OFF_STATE;
         }
     }
-
+    
+    
+    public int getState() {
+    	return state;
+    }
     public int getID() { return id; }
     public String getPlace() { return place; }
     public String getBankName() { return bankName; }

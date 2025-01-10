@@ -45,10 +45,10 @@ public class OperatorPanel {
                 }
                 else{
                     Money money  = new Money(1000);
-                    atm.getCashDispenser().setInitialCash(new Money(10000));
+
                     atm.setMaxWithdrawPerDay(money);
                     atm.setMaxWithdrawPerTransaction(money);
-                    atm.setMinCashToAllowTransaction(new Money(1));
+                    atm.setMinCashToAllowTransaction(new Money(10));
                     break;
                 }
             } catch (Display.Cancelled e) {
