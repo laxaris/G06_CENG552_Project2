@@ -31,7 +31,7 @@ public class FR6_LogSerialNumberSteps {
         
         atm.getDisplay().setTestMode(true);
         display = atm.getDisplay();
-        log = new Log();
+        log = new Log(atm);
     }
 
     @When("the operator turns on the ATM \\(FR6)")

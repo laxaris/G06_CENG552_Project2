@@ -35,9 +35,9 @@ public class ATM implements Runnable {
         		
         this.bankAddress = bankAddress;
         this.operatorPanel = new OperatorPanel(this);
-        this.log = new Log();
+        this.log = new Log(this);
         this.cardReader = new CardReader(this);
-        this.cashDispenser = new CashDispenser(log);
+        this.cashDispenser = new CashDispenser(log,this);
         
         this.networkToBank = new NetworkToBank(log, bankAddress,this);
         this.receiptPrinter = new ReceiptPrinter();

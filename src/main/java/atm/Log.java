@@ -16,13 +16,15 @@ import java.util.LinkedList;
 
 public class Log {
     private static final String LOG_FILE_PATH = "src/main/logfile.txt";
+    private ATM atm;
 
-    public Log() {
+    public Log(ATM atm) {
+        this.atm = atm;
     }
 
     public void logSend(Message message) {
         String logMessage = "[LOG] Sending: " + message;
-        System.out.println(logMessage);
+        atm.getDisplay().showMessage(logMessage);
         writeToFile(logMessage);
     }
     
@@ -33,18 +35,18 @@ public class Log {
 
     public void logResponse(Status response) {
         String logMessage = "[LOG] Response: " + response;
-        System.out.println(logMessage);
+        atm.getDisplay().showMessage(logMessage);
         writeToFile(logMessage);
     }
 
     public void logCashDispensed(Money amount) {
         String logMessage = "[LOG] Cash dispensed: " + amount;
-        System.out.println(logMessage);
+        atm.getDisplay().showMessage(logMessage);
         writeToFile(logMessage);
     }
     public void logCashAdded(Money amount) {
         String logMessage = "[LOG] Cash added: " + amount;
-        System.out.println(logMessage);
+        atm.getDisplay().showMessage(logMessage);
         writeToFile(logMessage);
     }
 
@@ -69,7 +71,7 @@ public class Log {
     
     public void logEnvelopeAccepted() {
         String logMessage = "[LOG] Envelope accepted.";
-        System.out.println(logMessage);
+        atm.getDisplay().showMessage(logMessage);
         writeToFile(logMessage);
     }
     
@@ -82,7 +84,7 @@ public class Log {
         String logMessage = String.format("[LOG] Card Info - Serial Number: %s, Bank Code: %s, Expiry Date: %s",
                 card.getNumber(), card.getBankNumber(), card.getExpiryDate());
         
-        System.out.println(logMessage);
+        atm.getDisplay().showMessage(logMessage);
         writeToFile(logMessage);
     }
 
