@@ -1,0 +1,50 @@
+Feature: FR17 - Transfer Transaction
+  In order to provide secure fund transfers
+  As an ATM
+  I want to allow users to transfer money between accounts after successful authorization
+  And ensure the transfer amount is within the allowed transaction limit
+
+  Scenario: Successful transfer within transaction limit (FR17)
+    Given the ATM is turned off (FR17)
+    When the operator turns on the ATM (FR17)
+    And the ATM is running with sufficient cash (FR17)
+    And a valid cash card is entered (FR17)
+    And the user enters the correct password and authorization succeeds (FR17)
+    And the user selects the transfer option (FR17)
+    And the user enters a valid recipient account number (FR17)
+    And the user enters a transfer amount within the transaction limit (FR17)
+    Then the transfer sequence should begin (FR17)
+    Then the log should record the successful transfer (FR17)
+    Then the ATM should prompt for another transaction (FR17)
+
+  Scenario: Transfer exceeding the transaction limit (FR17)
+    Given the ATM is turned off (FR17)
+    When the operator turns on the ATM (FR17)
+    And the ATM is running with sufficient cash (FR17)
+    And a valid cash card is entered (FR17)
+    And the user enters the correct password and authorization succeeds (FR17)
+    And the user selects the transfer option (FR17)
+    And the user enters a valid recipient account number (FR17)
+    And the user enters a transfer amount exceeding the transaction limit (FR17)
+    Then the transfer should not proceed (FR17)
+
+  Scenario: Transfer exceeding account balance (FR17)
+    Given the ATM is turned off (FR17)
+    When the operator turns on the ATM (FR17)
+    And the ATM is running with sufficient cash (FR17)
+    And a valid cash card is entered (FR17)
+    And the user enters the correct password and authorization succeeds (FR17)
+    And the user selects the transfer option (FR17)
+    And the user enters a valid recipient account number (FR17)
+    And the user enters a transfer amount exceeding their account balance (FR17)
+    Then the ATM should display a message stating "Insufficient account balance for transfer" (FR17)
+    
+  Scenario: Transfer to an undefined account (FR17)
+    Given the ATM is turned off (FR17)
+    When the operator turns on the ATM (FR17)
+    And the ATM is running with sufficient cash (FR17)
+    And a valid cash card is entered (FR17)
+    And the user enters the correct password and authorization succeeds (FR17)
+    And the user attempts to transfer money to an undefined account (FR17)
+    Then the ATM should display a message stating "Invalid destination account" (FR17)
+    Then the ATM should display a message stating "Insufficient account balance for transfer" (FR17)

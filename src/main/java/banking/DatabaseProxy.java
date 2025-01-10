@@ -84,6 +84,9 @@ public class DatabaseProxy {
   
     public static boolean transfer(int fromAccount, int toAccount, double amount) {
         if (transferWithdraw(fromAccount, amount)) {
+        	if(!hasAccount(toAccount)) {
+        		return false;
+        	}
             deposit(toAccount, amount);
             return true;
         }
