@@ -14,7 +14,7 @@ Feature: FR11 FR12 FR13 FR14 FR15 FR16 - Withdrawal Transaction
     Then the withdrawal sequence should begin (FR11)
     Then the cash dispenser should dispense the correct amount (FR11)
     Then the log should record the cash dispensing (FR11)
-    Then the log should record the successful transaction (FR11)
+    Then the log should record the successful transaction also balance should be updated (FR11)
     Then the ATM should prompt for another transaction (FR11)
 
   Scenario: Withdrawal exceeding the transaction limit (FR11)

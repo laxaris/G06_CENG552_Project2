@@ -126,11 +126,13 @@ public class FR11_FR12_FR13_FR14_FR15_FR16_WithdrawalTransactionSteps {
         assertTrue(result.contains("[LOG] Cash dispensed:"));
     }
 
-    @Then("the log should record the successful transaction \\(FR11)")
+
+	@Then("the log should record the successful transaction also balance should be updated \\(FR11)")
     public void fr11_the_log_should_record_the_successful_transaction() throws InterruptedException {
         Thread.sleep(100);
         String result = display.getDisplayedMessageAt( 1);  
         assertTrue(result.contains("[LOG] Response: SUCCESS: Operation successful."));
+        assertEquals(500-50,DatabaseProxy.getAccount(123456).getBalance(),0.1);
     }
 
     @Then("the ATM should prompt for another transaction \\(FR11)")

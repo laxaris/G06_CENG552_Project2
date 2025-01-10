@@ -81,7 +81,7 @@ public class FR_Bonus_BalanceAndDepositSteps {
         display.setFakeInput("100");
     }
 
-    @Then("the ATM should confirm the deposit and update the balance \\(FR-Bonus)")
+    @Then("the ATM should confirm the deposit and update the balance also cash on the dispenser \\(FR-Bonus)")
     public void fr_bonus_ATM_confirms_deposit_and_updates_balance() throws InterruptedException {
         Thread.sleep(100);
         System.out.println(display.getAllTestMessages());
@@ -89,6 +89,7 @@ public class FR_Bonus_BalanceAndDepositSteps {
         assertTrue(result.contains("Cash added"));
         boolean bool = (balanceOnTheDispenser+100)==atm.getCashDispenser().getCashOnHand().toDouble();
         assertTrue(bool);
+        assertEquals(DatabaseProxy.getAccount(123456).getBalance(),50000+100,0.01);
     }
 
     @When("the user performs another balance inquiry \\(FR-Bonus)")
@@ -101,5 +102,6 @@ public class FR_Bonus_BalanceAndDepositSteps {
         Thread.sleep(100);
         String result = display.getDisplayedMessageAt(2);
         assertTrue(result.contains("Balance inquiry successful."));
+        
     }
 }
