@@ -6,8 +6,8 @@ import banking.*;
 
 public class ATM implements Runnable {
     private int id;
-    private String place;
-    private String bankName;
+    private Branch branch;
+    
     private OperatorPanel operatorPanel;
     private InetAddress bankAddress;
     private CardReader cardReader;
@@ -28,11 +28,11 @@ public class ATM implements Runnable {
     private static final int SERVING_CUSTOMER_STATE = 2;
 	protected static final int ERROR_STATE = 3;
 
-    public ATM(int id, String place, String bankName, InetAddress bankAddress) {
+    public ATM(int id, Branch branch, InetAddress bankAddress) {
     	this.display = new Display();
         this.id = id;
-        this.place = place;
-        this.bankName = bankName;
+        this.branch = branch;
+        		
         this.bankAddress = bankAddress;
         this.operatorPanel = new OperatorPanel(this);
         this.log = new Log();
@@ -139,9 +139,10 @@ public class ATM implements Runnable {
     public int getState() {
     	return state;
     }
+    public int getBankCode() { return branch.getBank().getBankCode(); }
     public int getID() { return id; }
-    public String getPlace() { return place; }
-    public String getBankName() { return bankName; }
+    public Bank getPlace() { return branch.getBank(); }
+    public Branch getBranch() { return branch; }
     public CardReader getCardReader() { return cardReader; }
     public CashDispenser getCashDispenser() { return cashDispenser; }
     public Display getDisplay() { return display; }

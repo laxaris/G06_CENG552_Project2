@@ -14,7 +14,7 @@ public abstract class Receipt {
     protected Receipt(ATM atm, Card card, Transaction transaction, Balances balances) {
         headingPortion = new String[4];
         headingPortion[0] = new Date().toString();
-        headingPortion[1] = atm.getBankName();
+        headingPortion[1] = atm.getBranch().getBank().getName();
         headingPortion[2] = "ATM #" + atm.getID() + " " + atm.getPlace();
         headingPortion[3] = "CARD " + card.getNumber() +
                 " TRANS #" + transaction.getSerialNumber();

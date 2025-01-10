@@ -2,6 +2,7 @@ import java.net.InetAddress;
 
 import atm.ATM;
 import banking.Account;
+import banking.Constants;
 import banking.DatabaseProxy;
 import banking.Money;
 
@@ -16,7 +17,8 @@ public class Main {
             DatabaseProxy.addAccount(account2);
 
             InetAddress bankAddress = InetAddress.getByName("127.0.0.1");
-            ATM atm = new ATM(1, "Main Branch", "MyBank", bankAddress);
+            
+            ATM atm = new ATM(1, Constants.branch, bankAddress);
             
             atm.getCashDispenser().setInitialCash(new Money(10000));
             atm.run();

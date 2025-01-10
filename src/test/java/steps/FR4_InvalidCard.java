@@ -10,6 +10,7 @@ import java.net.UnknownHostException;
 import atm.ATM;
 
 import atm.Display;
+import banking.Constants;
 import banking.Money;
 import io.cucumber.java.en.*;
 
@@ -23,7 +24,7 @@ public class FR4_InvalidCard {
     @Given("the ATM is turned off4")
     public void the_ATM_is_turned_off() throws UnknownHostException {
         InetAddress bankAddress = InetAddress.getByName("127.0.0.1");
-        atm = new ATM(1, "Mybank", "mybranch", bankAddress);
+        atm = new ATM(1,  Constants.branch ,bankAddress);
         atm.getDisplay().setTestMode(true);
         display = atm.getDisplay();
     }

@@ -10,6 +10,7 @@ import java.net.UnknownHostException;
 import atm.ATM;
 
 import atm.Display;import banking.Account;
+import banking.Constants;
 import banking.DatabaseProxy;
 import banking.Money;
 import io.cucumber.java.en.*;
@@ -26,7 +27,7 @@ public class FR5_InitiateAuthorizationDialogSteps {
     	Account account1 = new Account(123456, "1234", 50000.0, 0);
     	DatabaseProxy.addAccount(account1);
         InetAddress bankAddress = InetAddress.getByName("127.0.0.1");
-        atm = new ATM(1, "Mybank", "mybranch", bankAddress);
+        atm = new ATM(1,  Constants.branch, bankAddress);
         atm.getDisplay().setTestMode(true);
         display = atm.getDisplay();
     }

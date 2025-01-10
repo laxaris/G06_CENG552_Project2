@@ -14,6 +14,10 @@ public class NetworkToBank {
     private Log log;
     private InetAddress bankAddress;
     private ATM atm;
+    private int cardAuthorizationState = 0;
+    private static int NONE = 0;
+    private static int BAD_BANK_CODE=1;
+    private static int BAD_ACCOUNT_NUMBER = 2;
 
     public NetworkToBank(Log log, InetAddress bankAddress,ATM atm) {
         this.log = log;
@@ -67,6 +71,21 @@ public class NetworkToBank {
 
 
     public boolean sendAuthorizationRequest(Card card, int pin) {
+    	
+    	if(card.getBankNumber() != atm.getBankCode()) {
+    	    cardAuthorizationState = BAD_BANK_CODE;
+    	    
+    	    atm.getDisplay().showMessage("[ERROR] The cash card is not supported by this ATM. Please contact your bank.");
+    	    return false;
+    	}
+
+    	if(!DatabaseProxy.hasAccount(card.getAccountNumber())) {
+    	    cardAuthorizationState = BAD_ACCOUNT_NUMBER;
+    	    atm.getDisplay().showMessage("[ERROR] Invalid account number detected. Please check your card or contact your bank.");
+    	    return false;
+    	}
+
+    	
         if (!DatabaseProxy.verifyPassword(card.getAccountNumber(), String.valueOf(pin))) {
             return false;
         }
@@ -120,6 +139,10 @@ public class NetworkToBank {
             return Status.success();
         }
         return Status.failure("Transfer failed. Check balance and account details.");
+    }
+    
+    public int getCardAuthorizationCode() {
+    	return cardAuthorizationState;
     }
 
 

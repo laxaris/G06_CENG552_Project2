@@ -14,6 +14,7 @@ public class Session {
     private Money dailyWithdrawalLimit;
     private boolean isAuthorizationSuccesful;
     private static final int MAX_PIN_ATTEMPTS = 3;
+    public boolean cardRetainedDueToMultiplePinAttempts;
 
     private static final int READING_CARD_STATE = 1;
     private static final int READING_PIN_STATE = 2;
@@ -27,6 +28,7 @@ public class Session {
         this.state = READING_CARD_STATE;
         this.invalidPinAttempts = 0;
         this.isAuthorizationSuccesful=false;
+        this.cardRetainedDueToMultiplePinAttempts = false;
     }
     
     public boolean getIsAuthorizatinsuccesful() {
@@ -35,6 +37,10 @@ public class Session {
     
     public int getInvalidPinAttempts() {
     	return invalidPinAttempts;
+    }
+    
+    public boolean getIsCardRetainedDueToMultiplePinAttempts() {
+    	return cardRetainedDueToMultiplePinAttempts;
     }
 
     public void performSession() throws Display.Cancelled{
@@ -51,8 +57,9 @@ public class Session {
                         state = EJECTING_CARD_STATE;
                         break;
                     }
-                    
-                    if (card != null && DatabaseProxy.getAccount(card.getAccountNumber()) != null) {
+                    cardRetainedDueToMultiplePinAttempts = false;
+                    if (card != null ) {
+                    	
                         state = READING_PIN_STATE;
                         dailyWithdrawalLimit = DatabaseProxy.getDailyLimit(card.getAccountNumber());
                     } else {
@@ -69,10 +76,16 @@ public class Session {
                             state = CHOOSING_TRANSACTION_STATE;
                             invalidPinAttempts = 0;
                         } else {
+                        	if(atm.getNetworkToBank().getCardAuthorizationCode()!=0) {
+                        		atm.getCardReader().ejectCard();
+                                state = FINAL_STATE;
+                                break;
+                        	}
                             invalidPinAttempts++;
                             atm.getDisplay().showMessage("Incorrect PIN. Attempt: " + invalidPinAttempts);
                             if (invalidPinAttempts >= MAX_PIN_ATTEMPTS) {
-                                atm.getDisplay().showMessage("Card retained due to multiple incorrect attempts.");
+                                atm.getDisplay().showMessage("Card retained due to multiple incorrect attempts. Please call the bank");
+                                cardRetainedDueToMultiplePinAttempts = true;
                                 atm.getCardReader().retainCard();
                                 state = FINAL_STATE;
                             }

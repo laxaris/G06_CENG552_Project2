@@ -11,6 +11,11 @@ public class DatabaseProxy {
     public static void addAccount(Account account) {
         accounts.put(account.getAccountNumber(), account);
     }
+    
+ 
+    public static boolean hasAccount(int accountNumber) {
+        return accounts.containsKey(accountNumber);
+    }
 
     
     public static Account getAccount(int accountNumber) {

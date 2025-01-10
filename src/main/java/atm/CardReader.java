@@ -7,19 +7,26 @@ public class CardReader {
     private ATM atm;
     private boolean isInvalidCard;
     private boolean isExpiredCard;
+    private boolean isCardEjected;
+    private boolean isCardRetained;
 
     public CardReader(ATM atm) {
         this.atm = atm;
         isInvalidCard=false;
         isExpiredCard = false;
+        isCardEjected = false;
         
 
     }
 
     public Card readCard() throws Display.Cancelled {
+    	
         atm.getDisplay().showMessage("[CARD READER] Enter your 10-digit card number followed by the expiry date (e.g., 1234567890 01-24):");
         String input = atm.getDisplay().readString().trim();
         
+        
+        isCardEjected = false;
+        isCardRetained =false;
 
         if (input.equalsIgnoreCase("cancel")) {
             System.out.println("girdim");
@@ -77,12 +84,20 @@ public class CardReader {
     	return !(isInvalidCard&&isExpiredCard);
     }
     
+    public boolean isCardEjected() {
+    	return isCardEjected;
+    }
+    public boolean isCardRetained() {
+    	return isCardRetained;
+    }
 
     public void ejectCard() {
+    	isCardEjected = true;
     	atm.getDisplay().showMessage("[CARD READER] Card ejected.");
     }
 
     public void retainCard() {
+    	isCardRetained =true;
     	atm.getDisplay().showMessage("[CARD READER] Card retained.");
     }
 }

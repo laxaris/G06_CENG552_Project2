@@ -13,6 +13,7 @@ import atm.ATM;
 import atm.Display;
 import atm.NetworkToBank;
 import banking.Account;
+import banking.Constants;
 import banking.DatabaseProxy;
 import banking.Money;
 import io.cucumber.java.en.*;
@@ -29,7 +30,7 @@ public class FR7_FR9_AuthorizationAndTransactionSteps {
         InetAddress bankAddress = InetAddress.getByName("127.0.0.1");
         Account account1 = new Account(123456, "1234", 50000.0, 0);
         DatabaseProxy.addAccount(account1);
-        atm = new ATM(1, "Mybank", "mybranch", bankAddress);
+        atm = new ATM(1,  Constants.branch ,bankAddress);
         atm.getDisplay().setTestMode(true);
         display = atm.getDisplay();
         networkToBank = atm.getNetworkToBank();
