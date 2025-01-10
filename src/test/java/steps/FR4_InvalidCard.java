@@ -1,5 +1,6 @@
 package steps;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 
@@ -55,20 +56,20 @@ public class FR4_InvalidCard {
     @Then("the ATM should display an error message about the expired card4")
     public void the_ATM_should_display_an_error_message_about_the_expired_card() throws InterruptedException {
     	Thread.sleep(500);
-        boolean messageDisplayed = display.getLastDisplayedMessage().contains("[CARD READER] Enter your 10-digit card number followed by the expiry date (e.g., 1234567890 01-24):");
-        assertTrue("Error message for expired card not displayed!", messageDisplayed);
+        assertTrue("Error message for expired card not displayed!", atm.getCardReader().getIsExpiredCard());
     }
 
     @Then("the ATM should display an error message about the unreadable card4")
     public void the_ATM_should_display_an_error_message_about_the_unreadable_card() throws InterruptedException {
     	Thread.sleep(500);
-        boolean messageDisplayed = display.getLastDisplayedMessage().contains("[CARD READER] Enter your 10-digit card number followed by the expiry date (e.g., 1234567890 01-24):");
-        assertTrue("Error message for unreadable card not displayed!", messageDisplayed);
+        
+        assertTrue("Error message for unreadable card not displayed!", atm.getCardReader().getIsInvalidCard());
     }
 
     @Then("the ATM should eject the card4")
     public void the_ATM_should_eject_the_card() {
-        
+        String message = display.getLastDisplayedMessage();
+        assertEquals("[CARD READER] Enter your 10-digit card number followed by the expiry date (e.g., 1234567890 01-24):",message);
     }
 
 }

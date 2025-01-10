@@ -66,11 +66,15 @@ public class NetworkToBank {
     }
 
 
-    public Status sendAuthorizationRequest(Card card, int pin) {
+    public boolean sendAuthorizationRequest(Card card, int pin) {
         if (!DatabaseProxy.verifyPassword(card.getAccountNumber(), String.valueOf(pin))) {
-            return Status.invalidPIN();
+            return false;
         }
-        return Status.success();
+        return true;
+    }
+    
+    public void logValidCard(Card card) {
+    	log.logCardInfo(card);
     }
 
 

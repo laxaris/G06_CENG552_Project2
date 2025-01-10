@@ -1,30 +1,41 @@
-[LOG] Sending: WITHDRAW CARD# 1234123456 TRANS# 1 NO FROM NO TO $20000.00
-[LOG] Response: SUCCESS: Operation successful.
-[LOG] Sending: WITHDRAW CARD# 1234123456 TRANS# 1 NO FROM NO TO $20000.00
-[LOG] Response: SUCCESS: Operation successful.
-[LOG] Sending: WITHDRAW CARD# 1234123456 TRANS# 1 NO FROM NO TO $20000.00
-[LOG] Response: FAILURE: Insufficient cash on hand.
-[LOG] Sending: WITHDRAW CARD# 1234123456 TRANS# 1 NO FROM NO TO $100.00
-[LOG] Response: SUCCESS: Operation successful.
-[LOG] Sending: COMP_DEP CARD# 1234123456 TRANS# 2 NO FROM NO TO $100.00
-[LOG] Response: SUCCESS: Operation successful.
-[LOG] Sending: WITHDRAW CARD# 1234123456 TRANS# 1 NO FROM NO TO $100.00
-[LOG] Response: SUCCESS: Operation successful.
-[LOG] Sending: INQUIRY  CARD# 1234123456 TRANS# 1 FROM 123456 NO TO NO AMOUNT
-[LOG] Response: SUCCESS: Operation successful.
-[LOG] Sending: WITHDRAW CARD# 1234123456 TRANS# 2 NO FROM NO TO $1000.00
-[LOG] Response: SUCCESS: Operation successful.
-[LOG] Sending: TRANSFER CARD# 1234123456 TRANS# 3 FROM 123456 TO 111222 $10000.00
-[LOG] Response: SUCCESS: Operation successful.
-[LOG] Sending: INQUIRY  CARD# 1234123456 TRANS# 4 FROM 123456 NO TO NO AMOUNT
-[LOG] Response: SUCCESS: Operation successful.
-[LOG] Sending: INQUIRY  CARD# 1234123456 TRANS# 1 FROM 123456 NO TO NO AMOUNT
-[LOG] Response: SUCCESS: Operation successful.
-[LOG] Sending: INQUIRY  CARD# 1234123456 TRANS# 2 FROM 123456 NO TO NO AMOUNT
-[LOG] Response: SUCCESS: Operation successful.
-[LOG] Sending: TRANSFER CARD# 1234123456 TRANS# 3 FROM 123456 TO 111222 $30000.00
-[LOG] Response: SUCCESS: Operation successful.
-[LOG] Sending: WITHDRAW CARD# 1234123456 TRANS# 4 NO FROM NO TO $500.00
-[LOG] Response: SUCCESS: Operation successful.
-[LOG] Sending: INQUIRY  CARD# 1234111222 TRANS# 5 FROM 111222 NO TO NO AMOUNT
-[LOG] Response: SUCCESS: Operation successful.
+[2025-01-10 14:38:20] [LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2026-12-31
+[2025-01-10 14:39:39] [LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2026-12-31
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2028-12-31[2025-01-10 14:47:52] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2025-12-31[2025-01-10 14:47:53] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2025-12-31[2025-01-10 14:47:53] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2028-12-31[2025-01-10 15:09:19] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2025-12-31[2025-01-10 15:09:21] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2025-12-31[2025-01-10 15:09:21] 
+[LOG] Card Info - Serial Number: 1234567890, Bank Code: 1234, Expiry Date: 2025-12-31[2025-01-10 15:09:21] 
+[LOG] Card Info - Serial Number: 1234567890, Bank Code: 1234, Expiry Date: 2025-12-31[2025-01-10 15:09:21] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2028-12-31[2025-01-10 15:10:21] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2025-12-31[2025-01-10 15:10:23] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2025-12-31[2025-01-10 15:10:23] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2025-12-31[2025-01-10 15:10:23] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2025-12-31[2025-01-10 15:10:23] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2026-12-31[2025-01-10 15:17:40] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2028-12-31[2025-01-10 15:28:09] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2025-12-31[2025-01-10 15:28:11] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2025-12-31[2025-01-10 15:28:11] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2025-12-31[2025-01-10 15:28:11] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2025-12-31[2025-01-10 15:28:11] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2028-12-31[2025-01-10 15:29:03] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2025-12-31[2025-01-10 15:29:05] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2025-12-31[2025-01-10 15:29:05] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2025-12-31[2025-01-10 15:29:05] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2025-12-31[2025-01-10 15:29:05] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2028-12-31[2025-01-10 15:31:10] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2025-12-31[2025-01-10 15:31:12] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2025-12-31[2025-01-10 15:31:12] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2025-12-31[2025-01-10 15:31:12] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2025-12-31[2025-01-10 15:31:12] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2028-12-31[2025-01-10 15:33:34] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2025-12-31[2025-01-10 15:33:36] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2025-12-31[2025-01-10 15:33:36] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2025-12-31[2025-01-10 15:33:36] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2025-12-31[2025-01-10 15:33:36] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2028-12-31[2025-01-10 15:34:07] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2025-12-31[2025-01-10 15:34:08] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2025-12-31[2025-01-10 15:34:08] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2025-12-31[2025-01-10 15:34:08] 
+[LOG] Card Info - Serial Number: 1234123456, Bank Code: 1234, Expiry Date: 2025-12-31[2025-01-10 15:34:08] 

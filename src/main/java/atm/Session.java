@@ -12,6 +12,7 @@ public class Session {
     private int state;
     private int invalidPinAttempts;
     private Money dailyWithdrawalLimit;
+    private boolean isAuthorizationSuccesful;
     private static final int MAX_PIN_ATTEMPTS = 3;
 
     private static final int READING_CARD_STATE = 1;
@@ -25,9 +26,16 @@ public class Session {
         this.atm = atm;
         this.state = READING_CARD_STATE;
         this.invalidPinAttempts = 0;
+        this.isAuthorizationSuccesful=false;
     }
-
     
+    public boolean getIsAuthorizatinsuccesful() {
+    	return isAuthorizationSuccesful;
+    }
+    
+    public int getInvalidPinAttempts() {
+    	return invalidPinAttempts;
+    }
 
     public void performSession() throws Display.Cancelled{
         Card card = null;
@@ -36,6 +44,7 @@ public class Session {
         while (state != FINAL_STATE) {
             switch (state) {
                 case READING_CARD_STATE:
+                	
                     card = atm.getCardReader().readCard();
                     if(!atm.checkCashAvailability()) {
                     	atm.getDisplay().showMessage("[DISPLAY]: Insufficient Cash, Please contact this number 555-555-5555");
@@ -55,7 +64,8 @@ public class Session {
                 case READING_PIN_STATE:
                     try {
                         pin = atm.getDisplay().readPIN("Please enter your PIN\nThen press ENTER");
-                        if (DatabaseProxy.verifyPassword(card.getAccountNumber(), String.valueOf(pin))) {
+                        if (atm.getNetworkToBank().sendAuthorizationRequest(card, pin)) {
+                        	isAuthorizationSuccesful = true;
                             state = CHOOSING_TRANSACTION_STATE;
                             invalidPinAttempts = 0;
                         } else {
@@ -95,6 +105,7 @@ public class Session {
                     break;
 
                 case EJECTING_CARD_STATE:
+                	isAuthorizationSuccesful = false;
                     atm.getCardReader().ejectCard();
                     if(!atm.checkCashAvailability()) {
                     	state = FINAL_STATE;

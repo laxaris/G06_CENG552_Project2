@@ -7,6 +7,8 @@ import java.net.UnknownHostException;
 
 import atm.ATM;
 import atm.Display;
+import banking.Account;
+import banking.DatabaseProxy;
 import banking.Money;
 import io.cucumber.java.en.*;
 
@@ -19,6 +21,8 @@ public class FR1_InitializeParametersSteps {
     @Given("the ATM is turned offf")
     public void the_ATM_is_turned_off() throws UnknownHostException {
     	  InetAddress bankAddress = InetAddress.getByName("127.0.0.1");
+    	  Account account1 = new Account(123456, "1234", 50000.0, 0);
+          DatabaseProxy.addAccount(account1);
         atm = new ATM(1, "Mybank", null, bankAddress);
         atm.getDisplay().setTestMode(true);
         display = atm.getDisplay();

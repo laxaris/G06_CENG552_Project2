@@ -1,5 +1,6 @@
 package atm;
 
+import banking.Card;
 import banking.Message;
 import banking.Money;
 import banking.Status;
@@ -9,10 +10,12 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 
 public class Log {
-    private static final String LOG_FILE_PATH = "logfile.txt";
+    private static final String LOG_FILE_PATH = "src/main/logfile.txt";
 
     public Log() {
     }
@@ -64,13 +67,29 @@ public class Log {
         System.out.println(logMessage);
         writeToFile(logMessage);
     }
+    
+    public void logCardInfo(Card card) {
+        if (card == null) {
+            writeToFile("[LOG] Attempted to log a null card.");
+            return;
+        }
+        
+        String logMessage = String.format("[LOG] Card Info - Serial Number: %s, Bank Code: %s, Expiry Date: %s",
+                card.getNumber(), card.getBankNumber(), card.getExpiryDate());
+        
+        System.out.println(logMessage);
+        writeToFile(logMessage);
+    }
 
     private void writeToFile(String message) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String timestamp = LocalDateTime.now().format(formatter);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(LOG_FILE_PATH, true))) {
-            writer.write(message);
+            writer.write(  message +"[" + timestamp + "] ");
             writer.newLine();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 }

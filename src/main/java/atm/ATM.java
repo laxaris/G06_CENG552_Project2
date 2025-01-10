@@ -21,6 +21,7 @@ public class ATM implements Runnable {
     private Money maxWithdrawPerDay;
     private Money maxWithdrawPerTransaction;
     private Money minCashToAllowTransaction;
+    private Session session;
 
     private static final int OFF_STATE = 0;
     private static final int IDLE_STATE = 1;
@@ -77,7 +78,8 @@ public class ATM implements Runnable {
                 	
                     display.showMessage("Waiting for card insertion...");
                     try{
-                    new Session(this).performSession();}
+                    session = new Session(this);
+                    		session.performSession();}
                     catch(Display.Cancelled e){
                         display.showMessage("[ERROR] Operation Cancelled.");
                         state = OFF_STATE;
@@ -96,6 +98,10 @@ public class ATM implements Runnable {
                     break;
             }}
         
+    }
+    
+    public Session getSession() {
+    	return session;
     }
 
     public void performStartup() {
