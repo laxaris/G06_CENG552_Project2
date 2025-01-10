@@ -18,9 +18,6 @@ public class Message {
             case WITHDRAWAL:
                 result += "WITHDRAW";
                 break;
-            case INITIATE_DEPOSIT:
-                result += "INIT_DEP";
-                break;
             case COMPLETE_DEPOSIT:
                 result += "COMP_DEP";
                 break;

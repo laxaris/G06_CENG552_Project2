@@ -69,9 +69,7 @@ public abstract class Transaction {
 
                 case SENDING_TO_BANK_STATE:
                     status = atm.getNetworkToBank().sendMessage(message, balances);
-                    if (status.isInvalidPIN()) {
-                        state = INVALID_PIN_STATE;
-                    } else if (status.isSuccess()) {
+                    if (status.isSuccess()) {
                         state = COMPLETING_TRANSACTION_STATE;
                     } else {
                         doAnotherMessage = status.getMessage();
@@ -79,16 +77,7 @@ public abstract class Transaction {
                     }
                     break;
 
-                case INVALID_PIN_STATE:
-                    try {
-                        pin = atm.getDisplay().readPIN("PIN was incorrect. Please re-enter your PIN:");
-                        message.setPIN(pin);
-                        state = SENDING_TO_BANK_STATE;
-                    } catch (Exception e) {
-                        doAnotherMessage = "Transaction cancelled.";
-                        state = ASKING_DO_ANOTHER_STATE;
-                    }
-                    break;
+                
 
                 case COMPLETING_TRANSACTION_STATE:
                     try {

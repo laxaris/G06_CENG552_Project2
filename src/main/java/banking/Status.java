@@ -17,9 +17,7 @@ public class Status {
         return new Status(true, false, "Operation successful.");
     }
 
-    public static Status invalidPIN() {
-        return new Status(false, true, "Invalid PIN entered.");
-    }
+
 
     public static Status failure(String message) {
         return new Status(false, false, message);
@@ -43,8 +41,7 @@ public class Status {
     public String toString() {
         if (success)
             return "SUCCESS: " + message;
-        else if (invalidPIN)
-            return "INVALID PIN: " + message;
+
         else
             return "FAILURE: " + message;
     }
