@@ -52,7 +52,7 @@ public class DatabaseProxy {
         throw new IllegalArgumentException("Account does not exist.");
     }
 
-    // Para çekme işlemi
+ 
     public static boolean withdraw(int accountNumber, double amount) {
         Account account = accounts.get(accountNumber);
         if (account != null && account.getBalance() >= amount) {
@@ -63,7 +63,7 @@ public class DatabaseProxy {
         return false;
     }
 
-    // Para yatırma işlemi
+  
     public static void deposit(int accountNumber, double amount) {
         Account account = accounts.get(accountNumber);
         if (account != null) {
@@ -81,7 +81,7 @@ public class DatabaseProxy {
         return false;
     }
 
-    // Transfer işlemi
+  
     public static boolean transfer(int fromAccount, int toAccount, double amount) {
         if (transferWithdraw(fromAccount, amount)) {
             deposit(toAccount, amount);
@@ -90,7 +90,7 @@ public class DatabaseProxy {
         return false;
     }
 
-    // Maksimum günlük limit kontrolü
+
     public static boolean checkDailyLimit(int accountNumber, double amount, double dailyLimit) {
         return getBalance(accountNumber) >= amount && amount <= dailyLimit;
     }

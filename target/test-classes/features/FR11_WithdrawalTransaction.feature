@@ -9,7 +9,7 @@ Feature: FR11 - Withdrawal Transaction
     When the operator turns on the ATM (FR11)
     And the ATM is running with sufficient cash (FR11)
     And a valid cash card is entered (FR11)
-    And the user enters the correct password (FR11)
+    And the user enters the correct password and authorization succeeds (FR11)
     And the user enters an amount within the transaction limit (FR11)
     Then the withdrawal sequence should begin (FR11)
 
@@ -18,6 +18,6 @@ Feature: FR11 - Withdrawal Transaction
     When the operator turns on the ATM (FR11)
     And the ATM is running with sufficient cash (FR11)
     And a valid cash card is entered (FR11)
-    And the user enters the correct password (FR11)
+    And the user enters the correct password and authorization succeeds (FR11)
     And the user enters an amount exceeding the transaction limit (FR11)
     Then the withdrawal should not proceed (FR11)

@@ -18,6 +18,12 @@ public class CashDispenser {
     public boolean checkCashOnHand(Money amount) {
         return cashOnHand.lessFrom(amount);
     }
+    
+    public void addCash(Money amount) {
+    	cashOnHand.add(amount);
+        System.out.println("[CASH DISPENSER] Adding " + amount);
+        log.logCashAdded(amount);
+    }
 
     public void dispenseCash(Money amount) {
         cashOnHand.substract(amount);

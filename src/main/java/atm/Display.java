@@ -3,6 +3,8 @@ package atm;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 import banking.Money;
 
 public class Display {
@@ -10,11 +12,12 @@ public class Display {
     private boolean testMode = false;
     private Queue<String> testInputs;
     private String lastShowedMessage;
-    
+    private List<String> testModeMessages; 
 
     public Display() {
         scanner = new Scanner(System.in);
         testInputs = new LinkedList<>();
+        testModeMessages = new ArrayList<>();
     }
 
     public void setTestMode(boolean enabled) {
@@ -105,13 +108,36 @@ public class Display {
     }
 
     public void showMessage(String message) {
-    	lastShowedMessage = message;
-    	
+        lastShowedMessage = message;
         System.out.println(message);
+        
+        if (testMode) {
+            testModeMessages.add(message);  
+        }
     }
 
-	public String getLastDisplayedMessage() {
-		
-		return lastShowedMessage;
-	}
+    public String getLastDisplayedMessage() {
+        return lastShowedMessage;
+    }
+
+    public String getDisplayedMessageAt(int index) {
+        if (testMode) {
+            if (index >= 0 && index < testModeMessages.size()) {
+                return testModeMessages.get(testModeMessages.size()-index-1);
+            } else {
+                return "[ERROR] Invalid message index!";
+            }
+        } else {
+            return "[ERROR] Test mode is not active!";
+        }
+    }
+    
+
+    public List<String> getAllTestMessages() {
+        if (testMode) {
+            return new ArrayList<>(testModeMessages);
+        } else {
+            return new ArrayList<>();
+        }
+    }
 }

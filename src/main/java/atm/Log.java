@@ -42,6 +42,11 @@ public class Log {
         System.out.println(logMessage);
         writeToFile(logMessage);
     }
+    public void logCashAdded(Money amount) {
+        String logMessage = "[LOG] Cash added: " + amount;
+        System.out.println(logMessage);
+        writeToFile(logMessage);
+    }
 
     public String getLastLog(int index) {
         LinkedList<String> logs = new LinkedList<>();
