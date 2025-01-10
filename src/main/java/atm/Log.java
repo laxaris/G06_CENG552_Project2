@@ -69,11 +69,7 @@ public class Log {
         return logs.get(logs.size() - index);
     }
     
-    public void logEnvelopeAccepted() {
-        String logMessage = "[LOG] Envelope accepted.";
-        atm.getDisplay().showMessage(logMessage);
-        writeToFile(logMessage);
-    }
+
     
     public void logCardInfo(Card card) {
         if (card == null) {

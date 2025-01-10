@@ -32,11 +32,7 @@ public class Log {
         writeToFile(logMessage);
     }
 
-    public void logEnvelopeAccepted() {
-        String logMessage = "[LOG] Envelope accepted.";
-        System.out.println(logMessage);
-        writeToFile(logMessage);
-    }
+
 
     private void writeToFile(String message) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(LOG_FILE_PATH, true))) {
